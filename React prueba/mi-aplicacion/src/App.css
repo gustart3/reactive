@@ -1,0 +1,184 @@
+.app {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.no-blur {
+  filter: none !important; /* Elimina cualquier filtro heredado */
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.input-section {
+  margin-bottom: 30px;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card img {
+  width: 60%;
+  height: auto;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.blur {
+  filter: blur(5px); /* Ajusta la cantidad de desenfoque */
+  transition: filter 0.3s ease; /* Transición suave para el desenfoque */
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 5px;
+  max-width: 80%; /* Ancho máximo del modal */
+  max-height: 90%; /* Altura máxima del modal */
+  overflow: hidden; /* Evita el desbordamiento */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: flex; /* Usar flexbox para centrar el contenido */
+  text-align: center;
+  align-items: center; /* Alinea el contenido en la parte superior */
+  padding: 20px; /* Añade un poco de padding alrededor del contenido */
+}
+
+.modal-container {
+  display: flex;
+  align-items: flex-start; /* Alinea el contenido en la parte superior */
+  justify-content: space-between; /* Espacio entre columnas */
+  width: 100%; /* Ocupar el 100% del ancho del contenedor */
+}
+
+.form-and-comments {
+  flex: 1; /* Toma el 50% del ancho */
+  padding-right: 20px; /* Espacio entre columnas */
+  max-height: 80vh; /* Limita la altura del formulario y comentarios */
+  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
+}
+
+.modal-image {
+  max-width: 100%; /* Ajusta la imagen para que ocupe el 100% del ancho disponible */
+  max-height: 70vh; /* Mantiene la altura máxima de la ventana */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Media query para pantallas menores de 800px */
+@media (max-width: 1000px) {
+  .modal-container {
+    flex-direction: column-reverse; /* Cambia a columna en lugar de fila */
+    align-items: center; /* Centra el contenido horizontalmente */
+  }
+
+  .form-and-comments {
+    width: 100%; /* El formulario ocupará todo el ancho */
+    padding-right: 0; /* Elimina el padding derecho */
+    margin-top: 20px; /* Añade un margen superior */
+  }
+}
+
+.modal-image {
+  max-width: 35%; /* Ajusta la imagen para que ocupe hasta el 40% del ancho */
+  max-height: 55vh; /* Mantiene la altura máxima de la ventana */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+}
+
+.form-and-comments {
+  flex: 1; /* Toma el 50% del ancho */
+  padding-right: 20px; /* Espacio entre columnas */
+  max-height: 80vh; /* Limita la altura del formulario y comentarios */
+  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
+}
+
+.comments-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column; /* Asegura que los comentarios se apilen verticalmente */
+  align-items: center; /* Alinea los comentarios al inicio (izquierda) */
+  max-height: 60vh; /* Limita la altura del contenedor de comentarios */
+  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
+  width: 100%; /* Asegura que ocupe el ancho completo */
+}
+
+.comment-bubble {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 5px 0; /* Espacio entre los comentarios */
+  max-width: 80%; /* Limita el ancho del comentario */
+  word-wrap: break-word; /* Permite que las palabras largas se dividan */
+  display: inline-block; /* Permite que el comentario se ajuste al tamaño del texto */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.right-column {
+  flex: 1; /* Toma el 50% del ancho */
+  display: flex;
+  align-items: center; /* Centra la imagen verticalmente */
+  justify-content: center; /* Centra la imagen horizontalmente */
+}
