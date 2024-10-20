@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import image1 from "./imagenes/imagen1.png";
-import image2 from "./imagenes/imagen2.png";
-import image3 from "./imagenes/imagen3.png";
-import image4 from "./imagenes/imagen4.png";
-import image5 from "./imagenes/imagen5.png";
-import image6 from "./imagenes/imagen6.png";
 
 function App() {
   const [input, setInput] = useState("");
@@ -24,12 +18,36 @@ function App() {
     return storedImages
       ? JSON.parse(storedImages)
       : [
-          { src: image1, title: "AMOR", description: "Un emote enamorado" },
-          { src: image2, title: "BURLA", description: "Un emote burlón" },
-          { src: image3, title: "ENOJO", description: "Un emote enojado" },
-          { src: image4, title: "LLANTO", description: "Un emote llorando" },
-          { src: image5, title: "DIFRAZ", description: "Un emote disfrazado" },
-          { src: image6, title: "RISA", description: "Un emote riendo" },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen1.png`,
+            title: "AMOR",
+            description: "Un emote enamorado",
+          },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen2.png`,
+            title: "BURLA",
+            description: "Un emote burlón",
+          },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen3.png`,
+            title: "ENOJO",
+            description: "Un emote enojado",
+          },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen4.png`,
+            title: "LLANTO",
+            description: "Un emote llorando",
+          },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen5.png`,
+            title: "DIFRAZ",
+            description: "Un emote disfrazado",
+          },
+          {
+            src: `${process.env.PUBLIC_URL}/imagenes/imagen6.png`,
+            title: "RISA",
+            description: "Un emote riendo",
+          },
         ];
   });
 
