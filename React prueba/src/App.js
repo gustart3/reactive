@@ -272,24 +272,22 @@ function App() {
             />
             <input
               type="text"
-              placeholder="Título"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              required
+              placeholder="Título"
             />
             <input
               type="text"
-              placeholder="Descripción"
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
-              required
+              placeholder="Descripción"
             />
             <button type="submit">Agregar Imagen</button>
           </form>
         </section>
       </main>
       <footer>
-        <p>&copy; 2024 Mi primer sitio con REACT</p>
+        <p>Derechos reservados. Mi primer sitio con REACT</p>
       </footer>
     </div>
   );
