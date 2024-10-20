@@ -6,7 +6,7 @@ function App() {
   const [responseMessage, setResponseMessage] = useState("");
   const [likes, setLikes] = useState(() => {
     const storedLikes = localStorage.getItem("likes");
-    return storedLikes ? JSON.parse(storedLikes) : new Array(6).fill(0); // Cambia 6 por el número inicial de imágenes
+    return storedLikes ? JSON.parse(storedLikes) : new Array(6).fill(0);
   });
   const [comments, setComments] = useState(() => {
     const storedComments = localStorage.getItem("comments");
@@ -40,7 +40,7 @@ function App() {
           },
           {
             src: `${process.env.PUBLIC_URL}/imagenes/imagen5.png`,
-            title: "DIFRAZ",
+            title: "DISFRAZ",
             description: "Un emote disfrazado",
           },
           {
@@ -55,7 +55,6 @@ function App() {
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
-  // Guardar datos en localStorage cada vez que se actualizan
   useEffect(() => {
     localStorage.setItem("images", JSON.stringify(images));
     localStorage.setItem("likes", JSON.stringify(likes));
@@ -71,9 +70,7 @@ function App() {
 
     fetch("http://localhost/mi-backend/index.php", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({ inputValue: input }),
     })
       .then((response) => response.json())
@@ -97,10 +94,7 @@ function App() {
     const commentInput = e.target.elements.comment.value;
     if (commentInput.trim() !== "") {
       const newComments = [...comments];
-      if (!newComments[index]) {
-        newComments[index] = [];
-      }
-      newComments[index].push(commentInput);
+      newComments[index] = [...(newComments[index] || []), commentInput];
       setComments(newComments);
       e.target.reset();
     }
@@ -118,6 +112,10 @@ function App() {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         closeModal();
+      } else if (event.key === "ArrowLeft") {
+        goToPrevImage();
+      } else if (event.key === "ArrowRight") {
+        goToNextImage();
       }
     };
 
@@ -139,12 +137,22 @@ function App() {
         description: newDescription,
       };
       setImages((prevImages) => [...prevImages, newImageObj]);
-      setLikes((prevLikes) => [...prevLikes, 0]); // Agrega un nuevo contador de likes
-      setComments((prevComments) => [...prevComments, []]); // Agrega un nuevo arreglo de comentarios
+      setLikes((prevLikes) => [...prevLikes, 0]);
+      setComments((prevComments) => [...prevComments, []]);
       setNewImage(null);
       setNewTitle("");
       setNewDescription("");
     }
+  };
+
+  const goToNextImage = () => {
+    setSelectedImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const goToPrevImage = () => {
+    setSelectedImageIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
   return (
@@ -180,10 +188,10 @@ function App() {
           {responseMessage && <p>Respuesta del servidor: {responseMessage}</p>}
         </section>
         <section
-          className={`gallery ${selectedImageIndex !== null ? "blur" : ""}`}
+          className={`gallery01 ${selectedImageIndex !== null ? "blur" : ""}`}
         >
           <h2>Galería de Publicaciones</h2>
-          <div className="grid">
+          <div className="gallery-container">
             {images.map((image, index) => (
               <div className="card" key={index}>
                 <img
@@ -203,25 +211,29 @@ function App() {
           </div>
         </section>
         {selectedImageIndex !== null && (
-          <div className="modal" onClick={closeModal}>
-            <div
-              className="modal-content no-blur"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <span className="close" onClick={closeModal}>
+          <div className="modal">
+            <div className="modal-content">
+              <button className="close" onClick={closeModal}>
                 &times;
-              </span>
+              </button>
               <div className="modal-container">
-                <div className="form-and-comments">
-                  <h3>{images[selectedImageIndex].title}</h3>
-                  <p>{images[selectedImageIndex].description}</p>
-                  <p>
-                    Me gusta:{" "}
-                    {likes[selectedImageIndex] !== undefined
-                      ? likes[selectedImageIndex]
-                      : 0}
-                  </p>
-
+                <div className="column1">
+                  <button className="nav-button" onClick={goToPrevImage}>
+                    &lt;
+                  </button>
+                </div>
+                <div className="column">
+                  <img
+                    className="modal-image"
+                    src={images[selectedImageIndex].src}
+                    alt="Imagen seleccionada"
+                  />
+                  <div className="modal-info">
+                    <h3>{images[selectedImageIndex].title}</h3>
+                    <p>{images[selectedImageIndex].description}</p>
+                  </div>
+                </div>
+                <div className="column">
                   <form
                     onSubmit={(e) => handleCommentSubmit(e, selectedImageIndex)}
                   >
@@ -229,34 +241,33 @@ function App() {
                       type="text"
                       name="comment"
                       placeholder="Escribe un comentario..."
+                      required
                     />
                     <button type="submit">Comentar</button>
                   </form>
-                  <div className="comments-container">
+                  <div className="comments">
                     {comments[selectedImageIndex]?.map((comment, idx) => (
-                      <div className="comment-bubble" key={idx}>
+                      <div key={idx} className="chat-bubble">
                         {comment}
                       </div>
-                    )) || null}
+                    ))}
                   </div>
                 </div>
-                <img
-                  src={images[selectedImageIndex].src}
-                  alt={`emote ${selectedImageIndex + 1}`}
-                  style={{ maxWidth: "50%", height: "auto" }}
-                />
+                <div className="column1">
+                  <button className="nav-button" onClick={goToNextImage}>
+                    &gt;
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         )}
-
-        {/* Nueva sección para subir imágenes */}
-        <section className="upload-section">
-          <h2>Subir Nueva Imagen</h2>
+        <section className="new-image-section">
+          <h2>Agregar Nueva Imagen</h2>
           <form onSubmit={handleNewImageSubmit}>
             <input
               type="file"
-              accept="image/png"
+              accept="image/*"
               onChange={(e) => setNewImage(e.target.files[0])}
               required
             />
@@ -274,10 +285,13 @@ function App() {
               placeholder="Descripción"
               required
             />
-            <button type="submit">Subir Imagen</button>
+            <button type="submit">Agregar Imagen</button>
           </form>
         </section>
       </main>
+      <footer>
+        <p>Derechos reservados &copy; 2024</p>
+      </footer>
     </div>
   );
 }

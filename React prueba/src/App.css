@@ -1,19 +1,28 @@
-.app {
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  background-color: #f4f4f4;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 10px; /* Espaciado entre las tarjetas */
 }
 
-.no-blur {
-  filter: none !important; /* Elimina cualquier filtro heredado */
+h1,
+h2,
+h3 {
+  color: #aca2a2;
 }
 
-header {
-  background-color: #333;
+nav {
+  background-color: #2a302a;
   color: white;
   padding: 10px;
-  text-align: center;
+}
+
+nav h1 {
+  margin: 0;
 }
 
 nav ul {
@@ -21,9 +30,9 @@ nav ul {
   padding: 0;
 }
 
-nav li {
+nav ul li {
   display: inline;
-  margin: 0 15px;
+  margin-right: 10px;
 }
 
 nav a {
@@ -31,47 +40,68 @@ nav a {
   text-decoration: none;
 }
 
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .input-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="file"] {
+  margin: 5px;
+  padding: 10px;
+  width: 90%;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #493e3e;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #353635;
 }
 
 .gallery {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea si no hay suficiente espacio */
+  justify-content: space-between; /* Espaciado entre tarjetas */
+  margin: 0 auto; /* Centra el contenedor */
+  max-width: 1200px; /* Máximo ancho del contenedor */
 }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea si no hay suficiente espacio */
+  justify-content: space-between; /* Espaciado entre tarjetas */
+  margin: 0 auto; /* Centra el contenedor */
+  max-width: 1200px; /* Máximo ancho del contenedor */
 }
 
 .card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 15px;
   text-align: center;
-  transition: transform 0.2s;
+  flex: 1 1 calc(30% - 20px); /* Permite que las tarjetas crezcan y se ajusten a 3 por fila */
+  max-width: 300px; /* Ancho máximo de cada tarjeta */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto visual */
 }
 
 .card img {
-  width: 60%;
-  height: auto;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.blur {
-  filter: blur(5px); /* Ajusta la cantidad de desenfoque */
-  transition: filter 0.3s ease; /* Transición suave para el desenfoque */
-}
-
-footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.8em;
+  width: 100%; /* Asegúrate de que las imágenes se adapten al tamaño de la tarjeta */
+  height: auto; /* Mantiene la proporción de las imágenes */
+  /* max-height: 200px; */ /* Comentamos esto para evitar recortes */
+  object-fit: contain; /* Asegura que la imagen se ajuste completamente sin distorsión */
 }
 
 .modal {
@@ -80,105 +110,89 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: #fff;
+  background: white;
+  padding: 20px;
   border-radius: 5px;
-  max-width: 80%; /* Ancho máximo del modal */
-  max-height: 90%; /* Altura máxima del modal */
-  overflow: hidden; /* Evita el desbordamiento */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  display: flex; /* Usar flexbox para centrar el contenido */
-  text-align: center;
-  align-items: center; /* Alinea el contenido en la parte superior */
-  padding: 20px; /* Añade un poco de padding alrededor del contenido */
-}
-
-.modal-container {
-  display: flex;
-  align-items: flex-start; /* Alinea el contenido en la parte superior */
-  justify-content: space-between; /* Espacio entre columnas */
-  width: 100%; /* Ocupar el 100% del ancho del contenedor */
-}
-
-.form-and-comments {
-  flex: 1; /* Toma el 50% del ancho */
-  padding-right: 20px; /* Espacio entre columnas */
-  max-height: 80vh; /* Limita la altura del formulario y comentarios */
-  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
-}
-
-.modal-image {
-  max-width: 100%; /* Ajusta la imagen para que ocupe el 100% del ancho disponible */
-  max-height: 70vh; /* Mantiene la altura máxima de la ventana */
-  object-fit: contain; /* Asegura que la imagen no se recorte */
-  margin: 0 auto; /* Centra la imagen horizontalmente */
-}
-
-/* Media query para pantallas menores de 800px */
-@media (max-width: 1000px) {
-  .modal-container {
-    flex-direction: column-reverse; /* Cambia a columna en lugar de fila */
-    align-items: center; /* Centra el contenido horizontalmente */
-  }
-
-  .form-and-comments {
-    width: 100%; /* El formulario ocupará todo el ancho */
-    padding-right: 0; /* Elimina el padding derecho */
-    margin-top: 20px; /* Añade un margen superior */
-  }
-}
-
-.modal-image {
-  max-width: 35%; /* Ajusta la imagen para que ocupe hasta el 40% del ancho */
-  max-height: 55vh; /* Mantiene la altura máxima de la ventana */
-  object-fit: contain; /* Asegura que la imagen no se recorte */
-}
-
-.form-and-comments {
-  flex: 1; /* Toma el 50% del ancho */
-  padding-right: 20px; /* Espacio entre columnas */
-  max-height: 80vh; /* Limita la altura del formulario y comentarios */
-  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
-}
-
-.comments-container {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column; /* Asegura que los comentarios se apilen verticalmente */
-  align-items: center; /* Alinea los comentarios al inicio (izquierda) */
-  max-height: 60vh; /* Limita la altura del contenedor de comentarios */
-  overflow-y: auto; /* Permite desplazamiento si hay muchos comentarios */
-  width: 100%; /* Asegura que ocupe el ancho completo */
-}
-
-.comment-bubble {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 20px;
-  margin: 5px 0; /* Espacio entre los comentarios */
-  max-width: 80%; /* Limita el ancho del comentario */
-  word-wrap: break-word; /* Permite que las palabras largas se dividan */
-  display: inline-block; /* Permite que el comentario se ajuste al tamaño del texto */
+  position: relative;
+  width: 90%;
+  max-width: 900px;
 }
 
 .close {
   position: absolute;
   top: 10px;
-  right: 20px;
-  font-size: 28px;
+  right: 10px;
+  font-size: 30px;
   cursor: pointer;
 }
 
-.right-column {
-  flex: 1; /* Toma el 50% del ancho */
+.modal-container {
   display: flex;
-  align-items: center; /* Centra la imagen verticalmente */
-  justify-content: center; /* Centra la imagen horizontalmente */
+  justify-content: space-between;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+}
+.column1 {
+  flex: 1;
+  max-width: 3%;
+  min-height: 100%;
+  padding: 10px;
+}
+
+.nav-button {
+  background-color: #f0f0f0;
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 20px;
+}
+
+.modal-image {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.modal-info {
+  margin-top: 10px;
+}
+
+.comments {
+  margin-top: 10px;
+}
+
+.chat-bubble {
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%; /* Adjust modal width on small screens */
+  }
+
+  .nav-button {
+    font-size: 1.5rem; /* Smaller buttons on mobile */
+  }
 }
