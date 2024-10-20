@@ -245,7 +245,7 @@ function App() {
                     />
                     <button type="submit">Comentar</button>
                   </form>
-                  <div className="comments">
+                  <div className="comments" style={{ flexDirection: "column" }}>
                     {comments[selectedImageIndex]?.map((comment, idx) => (
                       <div key={idx} className="chat-bubble">
                         {comment}
@@ -269,20 +269,19 @@ function App() {
               type="file"
               accept="image/*"
               onChange={(e) => setNewImage(e.target.files[0])}
-              required
             />
             <input
               type="text"
+              placeholder="Título"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              placeholder="Título"
               required
             />
             <input
               type="text"
+              placeholder="Descripción"
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
-              placeholder="Descripción"
               required
             />
             <button type="submit">Agregar Imagen</button>
@@ -290,7 +289,7 @@ function App() {
         </section>
       </main>
       <footer>
-        <p>Derechos reservados &copy; 2024</p>
+        <p>&copy; 2024 Mi primer sitio con REACT</p>
       </footer>
     </div>
   );

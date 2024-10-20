@@ -3,10 +3,11 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  gap: 10px; /* Espaciado entre las tarjetas */
+  gap: 10px;
 }
 
 h1,
@@ -72,17 +73,18 @@ button:hover {
 
 .gallery {
   display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea si no hay suficiente espacio */
-  justify-content: space-between; /* Espaciado entre tarjetas */
-  margin: 0 auto; /* Centra el contenedor */
-  max-width: 1200px; /* Máximo ancho del contenedor */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
 }
+
 .gallery-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea si no hay suficiente espacio */
-  justify-content: space-between; /* Espaciado entre tarjetas */
-  margin: 0 auto; /* Centra el contenedor */
-  max-width: 1200px; /* Máximo ancho del contenedor */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .card {
@@ -92,16 +94,15 @@ button:hover {
   margin: 10px;
   padding: 15px;
   text-align: center;
-  flex: 1 1 calc(30% - 20px); /* Permite que las tarjetas crezcan y se ajusten a 3 por fila */
-  max-width: 300px; /* Ancho máximo de cada tarjeta */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto visual */
+  flex: 1 1 calc(30% - 20px);
+  max-width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
-  width: 100%; /* Asegúrate de que las imágenes se adapten al tamaño de la tarjeta */
-  height: auto; /* Mantiene la proporción de las imágenes */
-  /* max-height: 200px; */ /* Comentamos esto para evitar recortes */
-  object-fit: contain; /* Asegura que la imagen se ajuste completamente sin distorsión */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .modal {
@@ -124,6 +125,8 @@ button:hover {
   position: relative;
   width: 90%;
   max-width: 900px;
+  max-height: 90vh; /* Limita la altura máxima para evitar que el contenido se salga de la pantalla */
+  overflow: hidden;
 }
 
 .close {
@@ -143,9 +146,9 @@ button:hover {
   flex: 1;
   padding: 10px;
 }
+
 .column1 {
-  flex: 1;
-  max-width: 3%;
+  flex: 0 0 3%;
   min-height: 100%;
   padding: 10px;
 }
@@ -163,7 +166,9 @@ button:hover {
 
 .modal-image {
   max-width: 100%;
+  max-height: 80vh;
   border-radius: 5px;
+  object-fit: contain;
 }
 
 .modal-info {
@@ -186,13 +191,40 @@ button:hover {
   filter: blur(4px);
 }
 
-/* Media queries for responsive design */
-@media (max-width: 768px) {
-  .modal-content {
-    max-width: 90%; /* Adjust modal width on small screens */
+@media (max-width: 800px) {
+  .modal-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .nav-button {
-    font-size: 1.5rem; /* Smaller buttons on mobile */
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    overflow: auto;
+  }
+
+  .modal-image {
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    overflow: auto;
+  }
+
+  .column1 {
+    display: none;
+  }
+
+  .modal-info {
+    margin-bottom: 1rem;
+  }
+
+  .comments {
+    flex-direction: column;
+    margin-top: 1rem;
   }
 }
